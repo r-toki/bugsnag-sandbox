@@ -10,9 +10,16 @@
     "lint:fix": "yarn lint --fix",
     "format": "prettier -l \"./src/**/*.{js,jsx,ts,tsx,json,css,scss}\"",
     "format:fix": "yarn format --write",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "emu:dev": "firebase emulators:start --only functions",
+    "dev:all": "concurrently -n \"dev,emu:dev\" \"yarn dev\" \"yarn emu:dev\"",
+    "predeploy:hosting": "yarn build",
+    "deploy:hosting": "firebase deploy --only hosting",
+    "deploy:functions": "firebase deploy --only functions",
+    "deploy:all": "yarn deploy:hosting && yarn deploy:functions"
   },
   "dependencies": {
+    "firebase": "^10.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -22,6 +29,7 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
+    "concurrently": "^8.2.1",
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
