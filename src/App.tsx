@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { throwable } from "./firebase-functions";
 
 export default function App() {
@@ -17,7 +18,11 @@ export default function App() {
       <button onClick={() => throwable("").then((res) => set(res.data))}>
         ok
       </button>
-      <button onClick={() => throwable("err").catch((err) => set(err.code))}>
+      <button
+        onClick={() =>
+          throwable("err").catch((err) => set(JSON.stringify(err)))
+        }
+      >
         err
       </button>
       <div>{val ?? "undefined"}</div>
