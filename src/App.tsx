@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import { throwable } from "./firebase-functions";
 
+// NOTE: hash 値の確認用
+
 export default function App() {
   const [val, set] = useState<string>();
   const [, asyncThrow] = useState();
