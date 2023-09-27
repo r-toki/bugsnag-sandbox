@@ -5,6 +5,14 @@ import { throwable } from "./firebase-functions";
 export default function App() {
   const [val, set] = useState<string>();
 
+  function onOk() {
+    return throwable("").then((res) => set(res.data));
+  }
+
+  function onErr() {
+    return throwable("err").catch((err) => set(JSON.stringify(err)));
+  }
+
   return (
     <div
       style={{
@@ -15,16 +23,8 @@ export default function App() {
       }}
     >
       <div>App</div>
-      <button onClick={() => throwable("").then((res) => set(res.data))}>
-        ok
-      </button>
-      <button
-        onClick={() =>
-          throwable("err").catch((err) => set(JSON.stringify(err)))
-        }
-      >
-        err
-      </button>
+      <button onClick={onOk}>ok</button>
+      <button onClick={onErr}>err</button>
       <div>{val ?? "undefined"}</div>
     </div>
   );
