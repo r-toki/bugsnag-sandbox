@@ -1,13 +1,21 @@
-import { HttpsError, onCall } from "firebase-functions/v2/https";
+import {
+  CallableRequest,
+  HttpsError,
+  onCall,
+} from "firebase-functions/v2/https";
 
-export const throwable = onCall({}, (req) => {
-  switch (req.data) {
-    case "err": {
-      throw new HttpsError("internal", "err", {
-        message: "You might have done something wrong.",
-      });
+import { bugsnagWrapper } from "../util";
+
+export const throwable = onCall(
+  bugsnagWrapper(async (req: CallableRequest<any>) => {
+    switch (req.data) {
+      case "err": {
+        throw new HttpsError("internal", "Backend seen this error message.", {
+          message: "Frontend seen this error message.",
+        });
+      }
     }
-  }
 
-  return "ok";
-});
+    return "ok";
+  }),
+);

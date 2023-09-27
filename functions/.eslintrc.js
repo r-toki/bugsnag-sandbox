@@ -6,10 +6,10 @@ module.exports = {
   },
   extends: [
     "eslint:recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/typescript",
-    "google",
+    // "plugin:import/errors",
+    // "plugin:import/warnings",
+    // "plugin:import/typescript",
+    // "google",
     "plugin:@typescript-eslint/recommended",
     "prettier",
   ],
@@ -23,7 +23,6 @@ module.exports = {
   ],
   plugins: ["@typescript-eslint", "import", "simple-import-sort"],
   rules: {
-    "import/no-unresolved": 0,
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
   },

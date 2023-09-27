@@ -18,6 +18,7 @@
   },
   "main": "lib/index.js",
   "dependencies": {
+    "@bugsnag/js": "^7.21.0",
     "firebase-admin": "^11.8.0",
     "firebase-functions": "^4.3.1"
   },
