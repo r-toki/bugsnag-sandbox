@@ -4,13 +4,20 @@ import { throwable } from "./firebase-functions";
 
 export default function App() {
   const [val, set] = useState<string>();
+  const [, asyncThrow] = useState();
 
   function onOk() {
-    return throwable("").then((res) => set(res.data));
+    throwable("").then((res) => set(res.data));
   }
 
   function onErr() {
-    return throwable("err").catch((err) => set(JSON.stringify(err)));
+    throwable("err").catch((err) => {
+      const errMsg = err.details.message;
+      set(errMsg);
+      asyncThrow(() => {
+        throw new Error(errMsg);
+      });
+    });
   }
 
   return (

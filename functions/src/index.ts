@@ -6,7 +6,9 @@ setGlobalOptions({ region: "asia-northeast1" });
 export const throwable = onCall({}, (req) => {
   switch (req.data) {
     case "err": {
-      throw new HttpsError("internal", "err", { message: "err message here." });
+      throw new HttpsError("internal", "err", {
+        message: "You might have done something wrong.",
+      });
     }
   }
 
