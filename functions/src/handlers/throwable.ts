@@ -4,7 +4,7 @@ import {
   onCall,
 } from "firebase-functions/v2/https";
 
-import { bugsnagWrapper } from "../util";
+import { bugsnagWrapper } from "../bugsnag-wrapper";
 
 export const throwable = onCall(
   bugsnagWrapper(async (req: CallableRequest<any>) => {
