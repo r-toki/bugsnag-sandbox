@@ -1,8 +1,18 @@
 import Bugsnag from "@bugsnag/js";
 
-if (process.env.LOADED) {
+import { getEnv } from "./utils";
+
+const isBugsnagNotificationEnabled = ["production"].includes(
+  getEnv("RELEASE_STAGE"),
+);
+
+if (getEnv("LOADED")) {
   Bugsnag.start({
-    apiKey: process.env.BUGSNAG_API_KEY as string,
+    apiKey: getEnv("BUGSNAG_API_KEY"),
+    releaseStage: getEnv("RELEASE_STAGE") || "xxx",
+    onError: async () => {
+      return isBugsnagNotificationEnabled;
+    },
   });
 }
 
