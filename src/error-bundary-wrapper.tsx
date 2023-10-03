@@ -7,11 +7,9 @@ import { assertIsDefined } from "./util";
 Bugsnag.start({
   apiKey: import.meta.env.VITE_BUGSNAG_API_KEY,
   plugins: [new BugsnagPluginReact()],
-  releaseStage: import.meta.env.PROD ? "production" : "xxx",
+  releaseStage: import.meta.env.PROD ? "production" : "local",
   onError: async () => {
-    if (!import.meta.env.PROD) {
-      return false;
-    }
+    return import.meta.env.PROD;
   },
 });
 

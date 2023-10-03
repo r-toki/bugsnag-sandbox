@@ -9,7 +9,7 @@ const isBugsnagNotificationEnabled = ["production"].includes(
 if (getEnv("LOADED")) {
   Bugsnag.start({
     apiKey: getEnv("BUGSNAG_API_KEY"),
-    releaseStage: getEnv("RELEASE_STAGE") || "xxx",
+    releaseStage: getEnv("RELEASE_STAGE") || "local",
     onError: async () => {
       return isBugsnagNotificationEnabled;
     },

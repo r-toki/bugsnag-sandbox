@@ -10,3 +10,4 @@ node_modules/
 
 # Custome
 .env
+.env.bugsnag-sandbox
