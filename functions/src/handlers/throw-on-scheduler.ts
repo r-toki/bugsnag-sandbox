@@ -7,6 +7,6 @@ async function throwOnScheduleCore() {
 }
 
 export const throwOnSchedule = onSchedule(
-  { timeZone: "Asia/Tokyo", schedule: "*/5 13 * * *" },
+  { timeZone: "Asia/Tokyo", schedule: "0 13 * * *" },
   bugsnagWrapper(throwOnScheduleCore),
 );
