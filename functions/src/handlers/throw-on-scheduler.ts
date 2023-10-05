@@ -7,6 +7,6 @@ async function throwOnScheduleCore() {
 }
 
 export const throwOnSchedule = onSchedule(
-  "*/5 12-18 * * *",
+  "*/5 13 * * *",
   bugsnagWrapper(throwOnScheduleCore),
 );
