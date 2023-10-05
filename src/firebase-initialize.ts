@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
 import { connectFunctionsEmulator, getFunctions } from "firebase/functions";
 
 const firebaseConfig = {
@@ -12,9 +13,11 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
 export const functions = getFunctions(app, "asia-northeast1");
 
 if (process.env.NODE_ENV != "production") {
+  connectFirestoreEmulator(db, "127.0.0.1", 8080);
   connectFunctionsEmulator(functions, "127.0.0.1", 5001);
 }
 
