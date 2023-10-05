@@ -3,17 +3,17 @@ import { logger } from "firebase-functions/v2";
 
 import { getEnv } from "./utils";
 
-const isBugsnagNotificationEnabled = ["production"].includes(
-  getEnv("RELEASE_STAGE"),
-);
+const releaseStageMap: Record<string, string> = {
+  "bugsnag-sandbox": "production",
+};
+let releaseStage;
+if (getEnv("FUNCTIONS_EMULATOR") == "true") releaseStage = "development";
+else releaseStage = releaseStageMap[getEnv("GCLOUD_PROJECT")];
 
 if (getEnv("LOADED")) {
   Bugsnag.start({
     apiKey: getEnv("BUGSNAG_API_KEY"),
-    releaseStage: getEnv("RELEASE_STAGE") || "local",
-    onError: async () => {
-      return isBugsnagNotificationEnabled;
-    },
+    releaseStage,
   });
 }
 

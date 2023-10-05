@@ -7,10 +7,7 @@ import { assertIsDefined } from "./util";
 Bugsnag.start({
   apiKey: import.meta.env.VITE_BUGSNAG_API_KEY,
   plugins: [new BugsnagPluginReact()],
-  releaseStage: import.meta.env.PROD ? "production" : "local",
-  onError: async () => {
-    return import.meta.env.PROD;
-  },
+  releaseStage: import.meta.env.MODE,
 });
 
 const ErrorBoundary = Bugsnag.getPlugin("react")?.createErrorBoundary(React);

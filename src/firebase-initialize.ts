@@ -12,10 +12,15 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const functions = getFunctions(app, "asia-northeast1");
+export const functions = getFunctions(app, "asia-northeast1");
 
 if (process.env.NODE_ENV != "production") {
   connectFunctionsEmulator(functions, "127.0.0.1", 5001);
 }
 
-export { functions };
+export function getHttpsFunctionUrl(name: string) {
+  return import.meta.env.VITE_FIREBASE_HTTPS_FUNCTIONS_URL.replace(
+    "FUNCTION_NAME",
+    name,
+  );
+}

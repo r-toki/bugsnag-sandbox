@@ -1,7 +1,11 @@
 import { httpsCallable } from "firebase/functions";
 
-import { functions } from "./firebase-initialize";
+import { functions, getHttpsFunctionUrl } from "./firebase-initialize";
 
-export async function throwable(data: string) {
-  return httpsCallable<string, string>(functions, "throwable")(data);
+export async function throwOnCall() {
+  return httpsCallable(functions, "throwOnCall")();
+}
+
+export async function throwOnRequest() {
+  return fetch(getHttpsFunctionUrl("throwOnRequest"));
 }

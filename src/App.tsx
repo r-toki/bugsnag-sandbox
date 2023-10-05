@@ -1,27 +1,6 @@
-import { useState } from "react";
-
-import { throwable } from "./firebase-functions";
-
-// NOTE: hash 値の確認用
+import { throwOnCall, throwOnRequest } from "./firebase-functions";
 
 export default function App() {
-  const [val, set] = useState<string>();
-  const [, asyncThrow] = useState();
-
-  function onOk() {
-    throwable("").then((res) => set(res.data));
-  }
-
-  function onErr() {
-    throwable("err").catch((err) => {
-      const errMsg = err.details.message;
-      set(errMsg);
-      asyncThrow(() => {
-        throw new Error(errMsg);
-      });
-    });
-  }
-
   return (
     <div
       style={{
@@ -32,9 +11,8 @@ export default function App() {
       }}
     >
       <div>App</div>
-      <button onClick={onOk}>ok</button>
-      <button onClick={onErr}>err</button>
-      <div>{val ?? "undefined"}</div>
+      <button onClick={throwOnCall}>onCallError</button>
+      <button onClick={throwOnRequest}>onRequestError</button>
     </div>
   );
 }
