@@ -14,7 +14,7 @@
     "emu:dev": "firebase emulators:start --only firestore,functions",
     "dev:all": "concurrently -n \"dev,emu:dev,functions:dev\" \"yarn dev\" \"yarn emu:dev\" \"yarn --cwd functions build:watch\"",
     "predeploy:hosting": "yarn build",
-    "deploy:hosting": "firebase deploy --only hosting",
+    "deploy:hosting": "firebase deploy --only hosting,firestore",
     "deploy:functions": "firebase deploy --only functions",
     "deploy:all": "yarn deploy:hosting && yarn deploy:functions"
   },
